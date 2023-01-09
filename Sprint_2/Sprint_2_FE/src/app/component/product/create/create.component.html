@@ -1,0 +1,321 @@
+<div>
+  <div class="container-fluid h-100 d-flex flex-column">
+    <div class="row">
+      <div class="col-lg-3 h-100 mt-2" style="margin-right: 240px">
+        <iframe
+          width="680"
+          height="875"
+          src="https://www.youtube.com/embed/Ru4Jbmh7bcQ?rel=0&autoplay=1"
+          title="Avatar 2 - Trailer mới nhất - Vietsub"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="boxed col-lg-9 shadow-md h-100">
+        <form
+          *ngIf="formCreateProduct"
+          class="form"
+          [formGroup]="formCreateProduct"
+          (ngSubmit)="addNewProduct()"
+        >
+          <fieldset>
+            <legend>
+              <div class="mt-2 text-center">
+                <h1>Thêm dồng hồ mới</h1>
+              </div>
+            </legend>
+          </fieldset>
+          <div class="mb-2">
+            <div class="form-field d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/interface-edit.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label for="name" class="ms-2"
+              >Tên đồng hồ<span style="color: red"> (*)</span>:</label
+              >
+            </div>
+            <input
+              formControlName="name"
+              id="name"
+              type="text"
+              class="form-control"
+              placeholder="Nhập tên đồng hồ"
+              [ngClass]="
+                formCreateProduct.controls['name'].touched
+                  ? formCreateProduct.controls['name'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            />
+            <div class="invalid-feedback">
+              <div
+                *ngIf="
+                  formCreateProduct.controls['name'].errors?.required &&
+                  formCreateProduct.controls['name'].touched
+                "
+              >
+                Không được để trống.
+              </div>
+              <div
+                *ngIf="
+                  formCreateProduct.controls['name'].errors?.maxlength &&
+                  formCreateProduct.controls['name'].touched
+                "
+              >
+                Tên đồng hồ không được nhiều hơn 255 kí tự.
+              </div>
+              <div
+                *ngIf="
+                  formCreateProduct.controls['name'].errors?.pattern &&
+                  formCreateProduct.controls['name'].touched
+                "
+              >
+                Tên đồng hồ không được chứa kí tự đặc biệt.
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/dollar.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="initialPrice"
+              >Mặt kính (VND)<span style="color: red"> (*)</span>:</label
+              >
+            </div>
+            <input
+              formControlName="faceDiameter"
+              id="initialPrice"
+              type="text"
+              class="form-control"
+              placeholder="Nhập giá ban đầu"
+              [ngClass]="
+                formCreateProduct.controls['faceDiameter'].touched
+                  ? formCreateProduct.controls['faceDiameter'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            />
+            <div class="invalid-feedback">
+              <div
+                *ngIf="
+                  formCreateProduct.controls['faceDiameter'].errors?.required &&
+                  formCreateProduct.controls['faceDiameter'].touched
+                "
+              >
+                Không được để trống.
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  formCreateProduct.controls['faceDiameter'].hasError('pattern')
+                "
+                style="color: red"
+              >
+                Giá ban đầu phải là số nguyên dương lớn hơn 0.
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  formCreateProduct.controls['faceDiameter'].errors?.max &&
+                  formCreateProduct.controls['faceDiameter'].touched
+                "
+              >
+                c
+              </div>
+              <div
+                *ngIf="
+                  formCreateProduct.controls['faceDiameter'].errors?.pattern &&
+                  formCreateProduct.controls['faceDiameter'].touched
+                "
+              >
+                Giá sản phẩm không được chứa kí tự đặc biệt và chữ cái.
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/dollar.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="waterproof"
+              >Chống nước (VND)<span style="color: red"> (*)</span>:</label
+              >
+            </div>
+            <input
+              formControlName="waterproof"
+              id="waterproof"
+              type="text"
+              class="form-control"
+              placeholder="Nhập chống nước"
+              [ngClass]="
+                formCreateProduct.controls['waterproof'].touched
+                  ? formCreateProduct.controls['waterproof'].invalid
+                    ? 'is-invalid'
+                    : 'is-valid'
+                  : ''
+              "
+            />
+            <div class="invalid-feedback">
+              <div
+                *ngIf="
+                  formCreateProduct.controls['waterproof'].errors?.required &&
+                  formCreateProduct.controls['waterproof'].touched
+                "
+              >
+                Không được để trống.
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  formCreateProduct.controls['waterproof'].hasError('pattern')
+                "
+                style="color: red"
+              >
+                Giá ban đầu phải là số nguyên dương lớn hơn 0.
+              </div>
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  formCreateProduct.controls['waterproof'].errors?.max &&
+                  formCreateProduct.controls['waterproof'].touched
+                "
+              >
+                c
+              </div>
+              <div
+                *ngIf="
+                  formCreateProduct.controls['waterproof'].errors?.pattern &&
+                  formCreateProduct.controls['waterproof'].touched
+                "
+              >
+                Giá sản phẩm không được chứa kí tự đặc biệt và chữ cái.
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/money-increase.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="category"
+              >Chủng loại<span style="color: red"> (*)</span
+              >:</label
+              >
+            </div>
+            <div class="input-group">
+              <select
+                id="category"
+                formControlName="category"
+                class="form-select w-50"
+              >
+                <option value="">Chon chủng loại</option>
+                <option
+                  *ngFor="let item of categoryList"
+                  [value]="item.id"
+                >
+                  {{ item.name}}
+                </option>
+              </select>
+            </div>
+            <div class="invalid-feedback"
+                 *ngIf="
+                formCreateProduct.controls['category'].errors
+                  ?.required &&
+                formCreateProduct.controls['category'].touched
+              "
+            >
+              <span style="color: red"
+              >Vui lòng chọn bước giá để đấu giá.
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="d-flex align-items-center mb-2">
+              <object
+                data="assets/icons/category.svg"
+                width="20"
+                height="20"
+              ></object>
+              <label class="ms-2" for="brand"
+              >Brand<span style="color: red">(*)</span>:</label
+              >
+            </div>
+            <div class="input-group">
+              <select
+                id="brand"
+                formControlName="brand"
+                class="form-select w-50"
+              >
+                <option value="">Chủng loại</option>
+                <option *ngFor="let item of brandList" [value]="item.id">
+                  {{ item.name }}
+                </option>
+              </select>
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                formCreateProduct.controls['brand'].errors?.required &&
+                formCreateProduct.controls['brand'].touched
+              "
+            >
+              <span style="color: red">Vui lòng chọn chủng loại sản phẩm.</span>
+            </div>
+          </div>
+
+          <div class="d-flex mt-3 mb-2 w-100">
+            <button
+              type="submit"
+              class="btn btn-primary d-flex justify-content-center"
+              style="margin-right: 4px"
+            >
+              <object
+                data="assets/icons/legal-hammer.svg"
+                width="20"
+                height="20"
+                class="me-2 slide"
+              ></object>
+              <p>Thêm sản phẩm đồng hồ</p>
+            </button>
+            <button
+              type="reset"
+              (click)="resetForm(selectedFile)"
+              class="btn btn-outline btn-outline-primary d-flex justify-content-center"
+              style="margin-left: 684px"
+            >
+              <object
+                data="assets/icons/back.svg"
+                width="20"
+                height="20"
+                class="me-2 slide"
+              ></object>
+              <p>Nhập lại</p>
+            </button>
+          </div>
+        </form>
+        <div class="mb-2">
+          <span style="font-size: 15px; margin-left: 380px" class="fst-italic">
+            Trường có dấu <span style="color: red"> (*)</span> là bắt buộc,không
+            được bỏ trống.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

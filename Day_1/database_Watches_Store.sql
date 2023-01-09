@@ -38,19 +38,6 @@ create table brand(
     delete_status int
 );
 
-create table product(
-	id int primary key auto_increment,
-    register_day varchar(90),
-    `description` longtext,
-    price double,
-    quantity int,
-    category_id int,
-    brand_id int,
-    delete_status int,
-    foreign key (category_id) references category(id),
-    foreign key (brand_id) references brand(id)
-);
-
 create table watch (
 	id int primary key auto_increment,
     `name` varchar(360),
@@ -62,21 +49,23 @@ create table watch (
     shell_material varchar(90),
     designs varchar(90),
 	warranty varchar(90),
-    product_id int,
+     register_day varchar(90),
+    `description` longtext,
+    price double,
+    quantity int,
     category_id int,
     brand_id int,
     delete_status int,
-    foreign key (brand_id) references brand(id),
-    foreign key (product_id) references product(id),
-    foreign key (category_id) references category(id)
+    foreign key (category_id) references category(id),
+    foreign key (brand_id) references brand(id)
 );
 
 create table img_url_product(
 	id int primary key auto_increment,
     url varchar(360),
-    product_id int,
+    watch_id int,
     delete_status int,
-    foreign key (product_id) references product(id)
+    foreign key (watch_id) references watch(id)
 );
 
 create table guide(
@@ -140,24 +129,26 @@ create table product_order(
 create table product_order_detail(
 	id int primary key auto_increment,
     quantity int,
-    product_id int,
+    watch_id int,
     product_order_id int,
     delete_status int,
-    foreign key (product_id) references product(id),
+    foreign key (watch_id) references watch(id),
     foreign key (product_order_id) references product_order(id)
 );
-
 
 INSERT INTO `watches_store`.`account` (`id`, `username`, `password`, `delete_status`, `status_lock`) VALUES ('1', 'haint', '123', '0', '0');
 INSERT INTO `watches_store`.`account` (`id`, `username`, `password`, `delete_status`, `status_lock`) VALUES ('2', 'sonpt', '123', '0', '0');
 INSERT INTO `watches_store`.`account` (`id`, `username`, `password`, `delete_status`, `status_lock`) VALUES ('3', 'quangnn', '123', '0', '0');
+INSERT INTO `watches_store`.`account` (`id`, `username`, `password`, `delete_status`, `status_lock`) VALUES ('4', 'giangn', '123', '0', '0');
+
+
+INSERT INTO `watches_store`.`role` (`id`) VALUES ('1');
+INSERT INTO `watches_store`.`role` (`id`) VALUES ('2');
 
 INSERT INTO `watches_store`.`account_role` (`account_id`, `role_id`, `delete_status`) VALUES ('1', '1', '0');
 INSERT INTO `watches_store`.`account_role` (`account_id`, `role_id`, `delete_status`) VALUES ('2', '2', '0');
 INSERT INTO `watches_store`.`account_role` (`account_id`, `role_id`, `delete_status`) VALUES ('3', '2', '0');
 
-INSERT INTO `watches_store`.`role` (`id`) VALUES ('1');
-INSERT INTO `watches_store`.`role` (`id`) VALUES ('2');
 
 INSERT INTO `watches_store`.`category` (`id`, `name`, `delete_status`) VALUES ('1', 'Automatic', '0');
 INSERT INTO `watches_store`.`category` (`id`, `name`, `delete_status`) VALUES ('2', 'Quartz (Điện tử)', '0');
@@ -170,20 +161,19 @@ INSERT INTO `watches_store`.`brand` (`id`, `name`, `origin`, `delete_status`) VA
 INSERT INTO `watches_store`.`brand` (`id`, `name`, `origin`, `delete_status`) VALUES ('4', 'Longines', 'Thụy Sĩ', '0');
 INSERT INTO `watches_store`.`brand` (`id`, `name`, `origin`, `delete_status`) VALUES ('5', 'Calvin Klein', 'Mỹ', '0');
 
-INSERT INTO `watches_store`.`product` (`id`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('1', '2022-12-12', 'chưa có ', '1022222', '26', '1', '1', '0');
-INSERT INTO `watches_store`.`product` (`id`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('2', '2022-11-11', 'chưa có ', '1022222', '26', '2', '2', '0');
-INSERT INTO `watches_store`.`product` (`id`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('3', '2022-10-10', 'chưa có ', '1066666', '26', '3', '3', '0');
-INSERT INTO `watches_store`.`product` (`id`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('4', '2022-09-09', 'chưa có ', '1099999', '26', '4', '4', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('1', 'Đồng Hồ 1', '28mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nam ', 'Bảo hành quốc tế 10 năm', '2022-12-12', 'chưa có ', '22222', '26', '1', '1', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('2', 'Đồng Hồ 2', '32mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Da', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nữ', 'Bảo hành quốc tế 10 năm ư', '2022-11-11', 'chưa có', '33333', '26', '2', '2', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('3', 'Đồng Hồ 3', '40mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nam', 'Bảo hành quốc tế 10 năm', '2022-01-01', 'chưa có', '44444', '26', '3', '3', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('4', 'Đồng Hồ 4', '42mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nam', 'Bảo hành 10 năm', '2022-09-09', 'chưa có', '55555', '26', '4', '4', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('5', 'Đồng Hồ 5', '28mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nam ', 'Bảo hành quốc tế 10 năm', '2022-12-12', 'chưa có ', '22222', '26', '1', '1', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('6', 'Đồng Hồ 6', '32mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Da', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nữ', 'Bảo hành quốc tế 10 năm ư', '2022-11-11', 'chưa có', '33333', '26', '2', '2', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('7', 'Đồng Hồ 7', '40mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nam', 'Bảo hành quốc tế 10 năm', '2022-01-01', 'chưa có', '44444', '26', '3', '3', '0');
+INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `register_day`, `description`, `price`, `quantity`, `category_id`, `brand_id`, `delete_status`) VALUES ('8', 'Đồng Hồ 8', '42mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng Hồ Nam', 'Bảo hành 10 năm', '2022-09-09', 'chưa có', '55555', '26', '4', '4', '0');
 
-INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`,  `warranty`, `product_id`, `category_id`, `delete_status`) VALUES ('1', 'Đồng hồ 1', '39mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Da', 'Thép không gỉ', 'Đồng hồ Nữ', 'Bảo hành quốc tế 10 năm', '1', '1', '0');
-INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`,  `warranty`, `product_id`, `category_id`, `delete_status`) VALUES ('2', 'Đồng Hồ 2', '28mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Silocon', 'Hợp kim , đính đá swarovsky', 'Đồng hồ Nam', 'Bảo hành quốc tế 10 năm', '2', '2', '0');
-INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`,  `warranty`, `product_id`, `category_id`, `delete_status`) VALUES ('3', 'Đồng Hồ 3', '40mm', '5 ATM', 'Sapphire', '21 mm', 'Dây Da', 'Thép không gỉ', 'Đồng hồ Nam',  'Bảo hành quốc tế 10 năm', '3', '3', '0');
-INSERT INTO `watches_store`.`watch` (`id`, `name`, `face_diameter`, `waterproof`, `face_material`, `strap_size`, `wire_material`, `shell_material`, `designs`, `warranty`, `product_id`, `category_id`, `delete_status`) VALUES ('4', 'Đồng Hồ 4', '32mm', '5 ATM', 'Sapphire', '21 mm', 'Thép không gỉ', 'Hợp kim mạ PVD , đính đá swarovsky', 'Đồng hồ Nữ',  'Bảo hành quốc tế 10 năm', '4', '4', '0');
-
-INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `product_id`, `delete_status`) VALUES ('1', 'https://www.dangquangwatch.vn/upload/img_big/475468133_dmdweb5.jpg', '1', '0');
-INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `product_id`, `delete_status`) VALUES ('2', 'https://www.dangquangwatch.vn/upload/product/1938900257_Dong-ho-Diamond-D-DM3638L5IG-B.jpg', '2', '0');
-INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `product_id`, `delete_status`) VALUES ('3', 'https://www.dangquangwatch.vn/upload/product/1208396326_donghonuthuysy65.jpg', '3', '0');
-INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `product_id`, `delete_status`) VALUES ('4', 'https://www.dangquangwatch.vn/upload/img_big/947483881_D%E1%BB%92NG-H%E1%BB%92-CH%C3%8DNH-H%C3%83NG-6.jpg', '4', '0');
+INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `watch_id`, `delete_status`) VALUES ('1', 'https://www.dangquangwatch.vn/upload/img_big/475468133_dmdweb5.jpg', '1', '0');
+INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `watch_id`, `delete_status`) VALUES ('2', 'https://www.dangquangwatch.vn/upload/product/1938900257_Dong-ho-Diamond-D-DM3638L5IG-B.jpg', '2', '0');
+INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `watch_id`, `delete_status`) VALUES ('3', 'https://www.dangquangwatch.vn/upload/product/1208396326_donghonuthuysy65.jpg', '3', '0');
+INSERT INTO `watches_store`.`img_url_product` (`id`, `url`, `watch_id`, `delete_status`) VALUES ('4', 'https://www.dangquangwatch.vn/upload/img_big/947483881_D%E1%BB%92NG-H%E1%BB%92-CH%C3%8DNH-H%C3%83NG-6.jpg', '4', '0');
 
 INSERT INTO `watches_store`.`guide` (`id`, `title`, `content`, `delete_status`) VALUES ('1', 'Chưa có', 'Nội Dung ', '0');
 INSERT INTO `watches_store`.`guide` (`id`, `title`, `content`, `delete_status`) VALUES ('2', 'Chưa có ', 'Nội Dung ', '0');
@@ -206,6 +196,18 @@ INSERT INTO `watches_store`.`address` (`id`, `country`, `city`, `district`, `tow
 INSERT INTO `watches_store`.`address` (`id`, `country`, `city`, `district`, `town`, `detail_address`, `delete_status`) VALUES ('3', 'Việt Nam', 'Quãng Ngãi', '.Huyện 2', 'Xã 2', 'chie tiết3', '0');
 INSERT INTO `watches_store`.`address` (`id`, `country`, `city`, `district`, `town`, `detail_address`, `delete_status`) VALUES ('4', 'Việt Nam', 'BÌnh Định', 'Huyện 3', 'Xã 3', 'chi tiết4', '0');
 
+INSERT INTO `watches_store`.`user` (`id`, `avatar`, `birthday`, `email`, `firstname`, `lastname`, `id_card`, `phone`, `account_id`, `address_id`, `user_type_id`, `delete_status`) VALUES ('1', 'Chưa Có', '1999-12-12', '1@gmail.com', 'Hai', 'Nguyen Thanh', '111111111', '0835262626', '1', '1', '1', '0');
+INSERT INTO `watches_store`.`user` (`id`, `avatar`, `birthday`, `email`, `firstname`, `lastname`, `id_card`, `phone`, `account_id`, `address_id`, `user_type_id`, `delete_status`) VALUES ('2', 'Chưa có ', '1999-10-10', '2@gmail.com', 'Son', 'Pham The', '222222222', '09364545454', '2', '2', '2', '0');
+INSERT INTO `watches_store`.`user` (`id`, `avatar`, `birthday`, `email`, `firstname`, `lastname`, `id_card`, `phone`, `account_id`, `address_id`, `user_type_id`, `delete_status`) VALUES ('3', 'Chưa có ', '1999-11-11', '3@gmail.com', 'Chau', 'Phạm Thi', '333333333', '0921212122', '3', '3', '3', '0');
+INSERT INTO `watches_store`.`user` (`id`, `avatar`, `birthday`, `email`, `firstname`, `lastname`, `id_card`, `phone`, `account_id`, `address_id`, `user_type_id`, `delete_status`) VALUES ('4', 'Chưa có', '1999-09-09', '4@gmail.com', 'Giang', 'Le Bá Hoàng', '444444444', '0932323254', '4', '4', '4', '0');
 
+INSERT INTO `watches_store`.`product_order` (`id`, `user_id`, `order_date`, `delete_status`) VALUES ('1', '1', '2022-01-01', '0');
+INSERT INTO `watches_store`.`product_order` (`id`, `user_id`, `order_date`, `delete_status`) VALUES ('2', '2', '2022-02-02', '0');
+INSERT INTO `watches_store`.`product_order` (`id`, `user_id`, `order_date`, `delete_status`) VALUES ('3', '3', '2022-03-03', '0');
+INSERT INTO `watches_store`.`product_order` (`id`, `user_id`, `order_date`, `delete_status`) VALUES ('4', '4', '2022-04-04', '0');
 
+INSERT INTO `watches_store`.`product_order_detail` (`id`, `quantity`, `watch_id`, `product_order_id`, `delete_status`) VALUES ('1', '26', '1', '1', '0');
+INSERT INTO `watches_store`.`product_order_detail` (`id`, `quantity`, `watch_id`, `product_order_id`, `delete_status`) VALUES ('2', '26', '2', '2', '0');
+INSERT INTO `watches_store`.`product_order_detail` (`id`, `quantity`, `watch_id`, `product_order_id`, `delete_status`) VALUES ('3', '26', '3', '3', '0');
+INSERT INTO `watches_store`.`product_order_detail` (`id`, `quantity`, `watch_id`, `product_order_id`, `delete_status`) VALUES ('4', '26', '4', '4', '0');
 
