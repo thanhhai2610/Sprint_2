@@ -30,6 +30,14 @@ public class ProductOrder {
     public ProductOrder() {
     }
 
+    public ProductOrder(Integer id, String orderDate, User user, Boolean deleteStatus, Set<ProductOrderDetail> productOrderDetails) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.user = user;
+        this.deleteStatus = deleteStatus;
+        this.productOrderDetails = productOrderDetails;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -60,5 +68,13 @@ public class ProductOrder {
 
     public void setDeleteStatus(Boolean deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    public Set<ProductOrderDetail> getProductOrderDetails() {
+        return productOrderDetails;
+    }
+
+    public void setProductOrderDetails(Set<ProductOrderDetail> productOrderDetails) {
+        this.productOrderDetails = productOrderDetails;
     }
 }

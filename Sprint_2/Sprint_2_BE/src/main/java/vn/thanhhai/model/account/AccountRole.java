@@ -10,13 +10,12 @@ public class AccountRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonManagedReference
     private Integer id;
-
     @ManyToOne
     @JoinColumn(name = "role_id",referencedColumnName = "id")
     @JsonManagedReference
     private Role role;
-
     @ManyToOne
     @JoinColumn(name = "account_id",referencedColumnName ="id")
     @JsonManagedReference
@@ -25,11 +24,9 @@ public class AccountRole {
     public AccountRole() {
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
+    public AccountRole(Integer id, Role role, Account account) {
+        this.id = id;
+        this.role = role;
         this.account = account;
     }
 
@@ -47,6 +44,14 @@ public class AccountRole {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }

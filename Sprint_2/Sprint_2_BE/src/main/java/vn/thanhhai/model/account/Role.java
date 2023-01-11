@@ -11,12 +11,17 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-
     @JsonBackReference
     @OneToMany(mappedBy ="role")
     private Set<AccountRole> accountRoles;
 
     public Role() {
+    }
+
+    public Role(Integer id, String name, Set<AccountRole> accountRoles) {
+        this.id = id;
+        this.name = name;
+        this.accountRoles = accountRoles;
     }
 
     public Integer getId() {

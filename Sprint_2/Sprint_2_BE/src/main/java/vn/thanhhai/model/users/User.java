@@ -3,6 +3,8 @@ package vn.thanhhai.model.users;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import vn.thanhhai.model.account.Account;
+import vn.thanhhai.model.order.ProductOrder;
+import vn.thanhhai.model.order.ProductOrderDetail;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -43,16 +45,27 @@ public class User {
     @JsonManagedReference
     private Account account;
 
+    @OneToOne(mappedBy = "user")
+    private Account account1;
+
     @ManyToOne
     @JoinColumn(name = "user_type_id", referencedColumnName = "id")
     @JsonManagedReference
     private UserType userType;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Notification> notifications;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "user")
+    private Set<ProductOrder> productOrders;
+
 
     public User() {
     }
 
-    public User(Integer id, String firstname, String lastname, String email, String phone, String birthday, String idCard, String avatar, Boolean deleteStatus, Address address, Account account, UserType userType) {
+    public User(Integer id, String firstname, String lastname, String email, String phone, String birthday, String idCard, String avatar, Boolean deleteStatus, Address address, Account account, Account account1, UserType userType, Set<Notification> notifications, Set<ProductOrder> productOrders) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -64,7 +77,10 @@ public class User {
         this.deleteStatus = deleteStatus;
         this.address = address;
         this.account = account;
+        this.account1 = account1;
         this.userType = userType;
+        this.notifications = notifications;
+        this.productOrders = productOrders;
     }
 
     public Integer getId() {
@@ -155,11 +171,35 @@ public class User {
         this.account = account;
     }
 
+    public Account getAccount1() {
+        return account1;
+    }
+
+    public void setAccount1(Account account1) {
+        this.account1 = account1;
+    }
+
     public UserType getUserType() {
         return userType;
     }
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public Set<ProductOrder> getProductOrders() {
+        return productOrders;
+    }
+
+    public void setProductOrders(Set<ProductOrder> productOrders) {
+        this.productOrders = productOrders;
     }
 }

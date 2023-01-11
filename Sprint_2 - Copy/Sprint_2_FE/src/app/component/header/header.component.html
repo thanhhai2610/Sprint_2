@@ -1,0 +1,75 @@
+
+<header>
+  <!-- Header Start -->
+  <div class="header-area">
+    <div class="main-header header-sticky">
+      <div class="container-fluid">
+        <div class="menu-wrapper">
+          <!-- Logo -->
+          <div class="logo">
+            <a routerLink=""><img style="height: 66px; width: 190px"
+                                      src="../../../assets/img/logo/logoTH.png" alt=""></a>
+          </div>
+          <!-- Main-menu -->
+          <div class="main-menu d-none d-lg-block">
+            <nav>
+              <ul id="navigation">
+                <li> <a routerLink="">Trang Chủ</a></li>
+                <li><a href="shop.html">Thương Hiệu</a></li>
+                <li><a href="about.html">Đồng Hồ Nam</a></li>
+                <li><a href="about.html">Đồng Hồ Nữ</a></li>
+                <li class="hot"><a href="#">Khuyến Mãi</a>
+                  <ul class="submenu">
+                    <li><a href="shop.html"> Product list</a></li>
+                    <li><a href="product_details.html"> Product Details</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Trang</a>
+                  <ul class="submenu">
+                    <li *ngIf="checkLogin" (click)="logOut()"><a><span>Đăng Xuất</span> </a></li>
+                    <li><a routerLink="cart">Giỏ Hàng</a></li>
+                    <li><a href="elements.html">Element</a></li>
+                    <li><a href="confirmation.html">Confirmation</a></li>
+                    <li><a href="checkout.html">Product Checkout</a></li>
+                  </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!-- Header Right -->
+          <div class="header-right">
+            <ul>
+              <li>
+                <div class="nav-search search-switch">
+                  <span class="flaticon-search"></span>
+                </div>
+              </li>
+              <li><a routerLink="cart"><span class="flaticon-shopping-cart"></span></a></li>
+              <li *ngIf="!checkLogin"><a routerLink="login"><span>Đăng Nhập</span> </a></li>
+
+              <ul *ngIf="checkLogin"><a><span>{{nameAccount}}</span></a></ul>
+            </ul>
+          </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="col-12">
+          <div class="mobile_menu d-block d-lg-none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+</header>
+<!--? Preloader Start -->
+<div id="preloader-active">
+  <div class="preloader d-flex align-items-center justify-content-center">
+    <div class="preloader-inner position-relative">
+      <div class="preloader-circle"></div>
+      <div class="preloader-img pere-text">
+        <img src="../../../assets/img/logo/logoTH2.png" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Preloader Start -->
