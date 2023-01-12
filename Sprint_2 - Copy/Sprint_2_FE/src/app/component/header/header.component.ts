@@ -35,6 +35,9 @@ export class HeaderComponent implements OnInit {
         if (roles[i] === 'ROLE_ADMIN') {
           this.accountRole = 'ROLE_ADMIN';
         }
+        if (roles[i] === 'ROLE_USER') {
+          this.accountRole = 'ROLE_USER';
+        }
       }
     }
   }

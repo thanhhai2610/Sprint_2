@@ -14,16 +14,27 @@
             <nav>
               <ul id="navigation">
                 <li><a routerLink="">Trang Chủ</a></li>
-                <li><a href="shop.html">Thương Hiệu</a></li>
-                <li><a href="about.html">Đồng Hồ Nam</a></li>
-                <li><a href="about.html">Đồng Hồ Nữ</a></li>
-                <li class="hot"><a href="#">Khuyến Mãi</a>
+
+                <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'"><a  routerLink="list-users"
+                       class="nav-item nav-link">Quản lí người dùng</a>
+                </li>
+                <li *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'"><a  routerLink="list-products"
+                       class="nav-item nav-link">Quản lí sản phẩm</a>
+                </li>
+
+                <li *ngIf="!checkLogin || (checkLogin && accountRole == 'ROLE_USER' )"><a href="shop.html">Thương Hiệu</a></li>
+                <li *ngIf="!checkLogin || (checkLogin && accountRole == 'ROLE_USER')"><a href="about.html">Đồng Hồ Nam</a></li>
+                <li *ngIf="!checkLogin || (checkLogin && accountRole == 'ROLE_USER')"><a href="about.html">Đồng Hồ Nữ</a></li>
+                <li *ngIf="!checkLogin || (checkLogin && accountRole == 'ROLE_USER')" class="hot"><a >Khuyến Mãi</a>
                   <ul class="submenu">
                     <li><a href="shop.html"> Product list</a></li>
                     <li><a href="product_details.html"> Product Details</a></li>
                   </ul>
                 </li>
-                <li><a>Trang</a>
+
+
+
+                <li *ngIf="!checkLogin || (checkLogin && accountRole == 'ROLE_USER')"><a >Trang</a>
                   <ul class="submenu">
                     <li><a routerLink="cart">Giỏ Hàng</a></li>
                     <li><a href="elements.html">Element</a></li>
@@ -31,7 +42,8 @@
                     <li><a href="checkout.html">Product Checkout</a></li>
                   </ul>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+
+                <li *ngIf="!checkLogin || (checkLogin && accountRole == 'ROLE_USER')"><a href="contact.html">Contact</a></li>
               </ul>
             </nav>
           </div>
